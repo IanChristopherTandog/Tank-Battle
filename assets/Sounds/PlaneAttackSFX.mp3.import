@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PlaneAttackSFX.mp3-6041ea509d555a7444b26b092af92e04.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/PlaneAttackSFX.mp3"
+dest_files=[ "res://.import/PlaneAttackSFX.mp3-6041ea509d555a7444b26b092af92e04.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

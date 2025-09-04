@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tanks/EnemyTank.gd" type="Script" id=2]
+[ext_resource path="res://bullets/EnemyBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/UnitDisplay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/ground_shaker_asset/Red/Bodies/body_halftrack-enemy.png" type="Texture" id=5]
+[ext_resource path="res://assets/ground_shaker_asset/Red/Weapons/turret_01_mk1-enemy.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 39.7858, 35.5505 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "auto"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="EnemyTank" groups=["enemies"] instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+Bullet = ExtResource( 3 )
+gun_cooldown = 0.5
+max_health = 50
+turret_speed = 1.0
+detect_radius = 200
+
+[node name="Body" parent="." index="0"]
+texture = ExtResource( 5 )
+vframes = 2
+region_enabled = false
+region_rect = Rect2( 268, 186, 80, 76 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Smoke" parent="." index="2"]
+position = Vector2( -6, 0 )
+
+[node name="Turret" parent="." index="3"]
+texture = ExtResource( 6 )
+offset = Vector2( 20, 0 )
+vframes = 8
+region_enabled = false
+region_rect = Rect2( 371, 14, 60, 24 )
+
+[node name="Muzzle" parent="Turret" index="0"]
+position = Vector2( 76, 0 )
+
+[node name="Flash" parent="Turret" index="1"]
+position = Vector2( 55, 0 )
+offset = Vector2( 23, 0 )
+region_rect = Rect2( 644, 94, 50, 40 )
+
+[node name="DetectRadius" type="Area2D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
+
+[node name="LookAhead1" type="RayCast2D" parent="." index="5"]
+position = Vector2( 0, 30 )
+rotation = 0.174533
+enabled = true
+cast_to = Vector2( 100, 0 )
+collision_mask = 6
+
+[node name="LookAhead2" type="RayCast2D" parent="." index="6"]
+position = Vector2( 0, -30 )
+rotation = -0.174533
+enabled = true
+cast_to = Vector2( 200, 0 )
+collision_mask = 6
+
+[node name="UnitDisplay" parent="." index="7" instance=ExtResource( 4 )]
+
+[node name="Explosion" parent="." index="10"]
+scale = Vector2( 1.5, 1.5 )
+frame = 4
+
+[node name="EnemyAnimation" type="AnimationPlayer" parent="." index="11"]
+autoplay = "auto"
+anims/RESET = SubResource( 2 )
+anims/auto = SubResource( 3 )
+
+[connection signal="health_changed" from="." to="UnitDisplay" method="update_healthbar"]
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]

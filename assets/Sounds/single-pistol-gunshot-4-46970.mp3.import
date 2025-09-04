@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/single-pistol-gunshot-4-46970.mp3-cf4d9134b96d140b5f29494a8f20321d.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/single-pistol-gunshot-4-46970.mp3"
+dest_files=[ "res://.import/single-pistol-gunshot-4-46970.mp3-cf4d9134b96d140b5f29494a8f20321d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

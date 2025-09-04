@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/single shot.mp3-1bf268ace6566051ea1cb87b7a652649.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/single shot.mp3"
+dest_files=[ "res://.import/single shot.mp3-1bf268ace6566051ea1cb87b7a652649.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

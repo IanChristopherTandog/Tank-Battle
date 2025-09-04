@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://environment/Obstacle.gd" type="Script" id=1]
+[ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=2]
+[ext_resource path="res://effects/Explosion.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 52 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 101.178
+
+[node name="Obstacle" type="StaticBody2D"]
+script = ExtResource( 1 )
+type = 11
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 216, 550, 32, 104 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Explode" type="Area2D" parent="."]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+collision_mask = 0
+
+[node name="Explosion" parent="Explode" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Explode"]
+shape = SubResource( 2 )
+disabled = true
+
+[connection signal="body_entered" from="Explode" to="." method="_on_Explode_body_entered"]
+[connection signal="animation_finished" from="Explode/Explosion" to="." method="_on_Explosion_animation_finished"]

@@ -1,0 +1,150 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/Confetti.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/ScoreBoard.gd" type="Script" id=3]
+[ext_resource path="res://assets/Sounds/bgmusic.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/Sounds/Cheering.mp3" type="AudioStream" id=5]
+[ext_resource path="res://terrain/terrain_tiles.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/Sounds/increaseScore.mp3" type="AudioStream" id=7]
+[ext_resource path="res://assets/UI/UI.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 1 )
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1037, 350, 29.665, 2.11893, -29.665, -2.11893, 894, 350, 0, 0, 0, 0, 864, 314, 2.99661, 22.4746, -2.99661, -22.4746, 861, 184, 0, 0, 0, 0, 828, 158, 32.9628, -1.49831, -32.9628, 1.49831, 207, 158, 0, 0, 0, 0, 159, 185, 0, 0, 0, 0, 159, 508, -33.6739, 1.12246, 33.6739, -1.12246, 197, 547, 0, 0, 0, 0, 821, 541, -1.05946, 32.8434, 1.05946, -32.8434, 872, 508, 0, 0, 0, 0, 866, 379, 47.6758, 0, -47.6758, 0, 817, 352, 38.7249, 1.68369, -38.7249, -1.68369, 196, 352, 0, 0, 0, 0, 159, 309, 0, 0, 0, 0, 158, 177, 22.0486, 0.629961, -22.0486, -0.629961, 126, 157, 0, 0, 0, 0, -55, 161, 0, 0, 0, 0, -30, 409, 0, 0, 0, 0, 126, 415, 1.05946, 24.3676, -1.05946, -24.3676, 158, 387, 0.561231, 16.2757, -0.561231, -16.2757, 156, 371, 0, 0, 0, 0, 178, 352, 0, 0, 0, 0, 834, 352, -4.23785, 23.3082, 4.23785, -23.3082, 863, 325, 0, 0, 0, 0, 865, -46, 0, 0, 0, 0, 1084, -43, 0, 0, 0, 0, 1096, 350, 0, 0, 0, 0, 1037, 350 )
+}
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 288, 258, 48, 43 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 336, 258, 48, 43 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 384, 258, 48, 43 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 432, 258, 48, 43 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 8 )
+region = Rect2( 480, 258, 48, 43 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[node name="ScoreBoard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color( 0.72549, 0.658824, 0.658824, 1 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 1, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 30, 0, 9, 30, 0, 10, 30, 0, 11, 30, 0, 12, 30, 0, 13, 21, 0, 14, 30, 0, 15, 30, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 1, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 30, 0, 65545, 30, 0, 65546, 30, 0, 65547, 30, 0, 65548, 30, 0, 65549, 21, 0, 65550, 30, 0, 65551, 30, 0, 131072, 2, 0, 131073, 2, 0, 131074, 6, 0, 131075, 2, 0, 131076, 5, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 22, 0, 131081, 22, 0, 131082, 22, 0, 131083, 22, 0, 131084, 22, 0, 131085, 24, 0, 131086, 30, 0, 131087, 30, 0, 196608, 0, 0, 196609, 0, 0, 196610, 1, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 30, 0, 196617, 30, 0, 196618, 30, 0, 196619, 30, 0, 196620, 30, 0, 196621, 21, 0, 196622, 30, 0, 196623, 30, 0, 262144, 0, 0, 262145, 0, 0, 262146, 1, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 30, 0, 262153, 30, 0, 262154, 30, 0, 262155, 30, 0, 262156, 30, 0, 262157, 21, 0, 262158, 30, 0, 262159, 30, 0, 327680, 0, 0, 327681, 0, 0, 327682, 3, 0, 327683, 2, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 327688, 22, 0, 327689, 22, 0, 327690, 22, 0, 327691, 22, 0, 327692, 22, 0, 327693, 32, 0, 327694, 22, 0, 327695, 22, 0, 393216, 2, 0, 393217, 2, 0, 393218, 4, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 30, 0, 393225, 30, 0, 393226, 30, 0, 393227, 30, 0, 393228, 30, 0, 393229, 21, 0, 393230, 30, 0, 393231, 30, 0, 458752, 0, 0, 458753, 0, 0, 458754, 1, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 30, 0, 458761, 30, 0, 458762, 30, 0, 458763, 30, 0, 458764, 30, 0, 458765, 21, 0, 458766, 30, 0, 458767, 30, 0, 524288, 0, 0, 524289, 0, 0, 524290, 15, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0, 524296, 26, 0, 524297, 22, 0, 524298, 22, 0, 524299, 22, 0, 524300, 22, 0, 524301, 36, 0, 524302, 30, 0, 524303, 30, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 39, 0, 589833, 30, 0, 589834, 30, 0, 589835, 30, 0, 589836, 30, 0, 589837, 30, 0, 589838, 30, 0, 589839, 30, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.192157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.615686, 0.592157, 0.592157, 1 )
+
+[node name="Confetti" parent="." instance=ExtResource( 2 )]
+position = Vector2( 499, 164 )
+scale = Vector2( 8, 5 )
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -177.5
+margin_right = 512.0
+margin_bottom = -116.5
+custom_fonts/font = SubResource( 1 )
+text = "Mission complete!"
+align = 1
+
+[node name="Stats" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -396.5
+margin_top = -38.5
+margin_right = 396.5
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 2 )
+text = "You scored x points! Get ready for the next round!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Message" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -370.0
+margin_top = -132.0
+margin_right = 370.0
+margin_bottom = -101.0
+custom_fonts/font = SubResource( 3 )
+text = "x Seconds before proceeding to next round"
+align = 1
+autowrap = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="bgmusic" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 4 )
+
+[node name="cheer" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 5 )
+
+[node name="increaseScore" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 7 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 1037, 350 )
+rotation = 3.12388
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 914, 526 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 10 )
+frame = 3
+playing = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

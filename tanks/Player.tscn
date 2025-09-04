@@ -1,0 +1,138 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tanks/Player.gd" type="Script" id=2]
+[ext_resource path="res://bullets/PlayerBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/ground_shaker_asset/Blue/Weapons/turret_02_mk1-player.png" type="Texture" id=4]
+[ext_resource path="res://assets/ground_shaker_asset/Blue/Bodies/body_halftrack-player.png" type="Texture" id=5]
+[ext_resource path="res://tanks/Camera2D.gd" type="Script" id=6]
+[ext_resource path="res://buffs/Shield.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40.0229, 37.3374 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Turret:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "playerWeapon"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turret:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "tankMovement"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="Player" groups=["player"] instance=ExtResource( 1 )]
+position = Vector2( 741.177, 459.959 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+Bullet = ExtResource( 3 )
+max_speed = 300
+rotation_speed = 1.0
+gun_cooldown = 0.4
+max_health = 150
+gun_spread = 0.1
+max_ammo = 50
+ammo = 50
+
+[node name="Body" parent="." index="0"]
+texture = ExtResource( 5 )
+vframes = 2
+region_enabled = false
+region_rect = Rect2( 308, 262, 80, 83 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Smoke" parent="." index="2"]
+position = Vector2( 0.822998, -0.958984 )
+
+[node name="Turret" parent="." index="3"]
+texture = ExtResource( 4 )
+offset = Vector2( 20, 0 )
+vframes = 11
+region_enabled = false
+region_rect = Rect2( 684, 14, 60, 24 )
+
+[node name="Muzzle" parent="Turret" index="0"]
+position = Vector2( 74, 0 )
+
+[node name="Flash" parent="Turret" index="1"]
+self_modulate = Color( 0, 0.741176, 0.984314, 1 )
+position = Vector2( 70, 0 )
+scale = Vector2( 1, 1 )
+offset = Vector2( 25, 0 )
+region_rect = Rect2( 584, 58, 57, 32 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="4" groups=["camera"]]
+current = true
+zoom = Vector2( 1.2, 1.2 )
+limit_left = 0
+limit_top = 0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+script = ExtResource( 6 )
+
+[node name="TankAnimation" type="AnimationPlayer" parent="." index="8"]
+anims/RESET = SubResource( 2 )
+anims/playerWeapon = SubResource( 3 )
+anims/tankMovement = SubResource( 4 )
+
+[node name="Shield" parent="." index="9" instance=ExtResource( 7 )]
+visible = false
+collision_mask = 0
+
+[node name="ERDTimer" type="Timer" parent="." index="10"]
+
+[connection signal="timeout" from="ERDTimer" to="." method="_on_ERDTimer_timeout"]

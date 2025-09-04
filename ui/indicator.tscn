@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/indicator.gd" type="Script" id=1]
+[ext_resource path="res://ui/test.tscn" type="PackedScene" id=2]
+
+[node name="indicator" type="Node2D"]
+script = ExtResource( 1 )
+indicator_scene = ExtResource( 2 )
+
+[node name="Screen" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
